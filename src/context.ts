@@ -1,26 +1,29 @@
 function subStack()
 {
     let stack = new Error().stack;
-    let parenthesis = stack.indexOf("at ");
-    let substring;
-    stack = stack.substring(parenthesis+1);
-    while (parenthesis!==-1) {
-        parenthesis = stack.indexOf("at ");
-        substring = stack.substring(0,parenthesis+1);
-        if(substring.indexOf("node_modules")!==-1) {
-            stack = stack.substring(parenthesis+1);
+    if(stack) {
+        let parenthesis = stack.indexOf("at ");
+        let substring;
+        stack = stack.substring(parenthesis+1);
+        while (parenthesis!==-1) {
+            parenthesis = stack.indexOf("at ");
+            substring = stack.substring(0,parenthesis+1);
+            if(substring.indexOf("node_modules")!==-1) {
+                stack = stack.substring(parenthesis+1);
 
+            }
+            else {substring = substring.substring(0, substring.indexOf('\n')); break;}
         }
-        else {substring = substring.substring(0, substring.indexOf('\n')); break;}
-    }
 
-    let bar=-1;
-    for(let i = 0; i<substring.length; i++)
-    {
-        if(substring.indexOf('\\',i)!==-1)
-            bar=substring.indexOf('\\',i)
+        let bar=-1;
+        for(let i = 0; i<substring.length; i++)
+        {
+            if(substring.indexOf('\\',i)!==-1)
+                bar=substring.indexOf('\\',i)
+        }
+        return substring.substring(bar + 1);        
     }
-    return substring.substring(bar + 1);
+    return stack
 }
 
 function getFileName()
@@ -58,11 +61,12 @@ function getTimestamp()
 
 function getContext()
 {
-    let context = {};
-    context.filename=getFileName();
-    context.line=getLine();
-    context.column=getColumn();
-    context.timestamp=getTimestamp();
+    let context = {
+        filename:getFileName(),
+        line:getLine(),
+        column:getColumn(),
+        timestamp:getTimestamp(),
+    };
     return context;
 }
 
