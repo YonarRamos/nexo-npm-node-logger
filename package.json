@@ -1,5 +1,5 @@
 {
-  "name": "nexo-npm-logger",
+  "name": "nexo-npm-node-logger",
   "version": "1.0.17",
   "description": "Paquete de código que permite la captura y formateado dinámico de registros de depuración de una aplicación",
   "main": "index.js",
