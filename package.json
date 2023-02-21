@@ -2,8 +2,10 @@
   "name": "nexo-npm-node-logger",
   "version": "1.0.17",
   "description": "Paquete de código que permite la captura y formateado dinámico de registros de depuración de una aplicación",
-  "main": "index.js",
-  "scripts": {},
+  "main": "dist/index.js",
+  "scripts": {
+    "transpile": "babel src -d dist/src -x \".ts\" && babel index.ts --out-file dist/index.js"
+  },
   "author": "ismx",
   "license": "MIT",
   "dependencies": {
@@ -20,6 +22,10 @@
     "url": "https://github.com/ismx-node/nexo.git"
   },
   "devDependencies": {
+    "@babel/cli": "^7.21.0",
+    "@babel/core": "^7.21.0",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-typescript": "^7.21.0",
     "ts-node": "^10.9.1",
     "typescript": "^4.9.5"
   }
